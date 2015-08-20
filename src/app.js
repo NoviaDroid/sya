@@ -33,7 +33,7 @@ var MainLayer = cc.Layer.extend({
         return true;
     },
     onPlay : function(){
-
+        cc.director.runScene(new PictureScene(res.mainbg_jpg));
     }
 });
 
