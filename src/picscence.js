@@ -301,6 +301,8 @@ var SplitColsTransition = function (t, s) {
     return new cc.TransitionSplitCols(t, s);
 };
 
+var descrips = ["见面","date","牵手","愚公移山","kiss","美瞳","音乐剧","抱起史","捉迷藏","分手"];
+
 var PictureScene = cc.Scene.extend({
     pic : null,
     ctor : function(pic){
@@ -308,6 +310,7 @@ var PictureScene = cc.Scene.extend({
         this.pic = pic;
     },
     onEnter : function(pic){
+        console.log("onEnter");
         this._super();
         var picSprite = new cc.Sprite(this.pic);
         picSprite.setPosition(cc.winSize.width/2,cc.winSize.height/2);
@@ -316,5 +319,12 @@ var PictureScene = cc.Scene.extend({
         picSprite.setScaleX(scaleX);
         picSprite.setScaleY(scaleY);
         this.addChild(picSprite);
+
+        this.scheduleOnce(this.changeScene,5,"changeScene");
+    },
+    changeScene : function(){
+        console.log("changeScene");
+        var picScene = new PictureScene(res.mainbg_jpg);
+        cc.director.runScene(FadeTransition(1,picScene));
     }
 });

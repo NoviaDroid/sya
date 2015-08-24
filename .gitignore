@@ -1,0 +1,6 @@
+frameworks/
+sya.iml
+.DS_Store
+runtime/
+manifest.webapp
+.idea/

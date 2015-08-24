@@ -61,7 +61,8 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     //load resources
     cc.LoaderScene.preload(g_resources, function () {
-        cc.director.runScene(new MainScene());
+        cc.audioEngine.playMusic(res.sya_mp3, false);
+        cc.director.runScene(new PictureScene(res.mainbg_jpg));
     }, this);
 };
 cc.game.run();
