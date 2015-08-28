@@ -47,6 +47,7 @@
  *
  */
 
+
 cc.game.onStart = function(){
     if(!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
@@ -62,7 +63,7 @@ cc.game.onStart = function(){
     //load resources
     cc.LoaderScene.preload(g_resources, function () {
         cc.audioEngine.playMusic(res.sya_mp3, false);
-        cc.director.runScene(new PictureScene(res.mainbg_jpg));
+        cc.director.runScene(new PictureScene(res.p00_jpg));
     }, this);
 };
 cc.game.run();

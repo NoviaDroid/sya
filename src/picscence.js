@@ -301,7 +301,51 @@ var SplitColsTransition = function (t, s) {
     return new cc.TransitionSplitCols(t, s);
 };
 
-var descrips = ["见面","date","牵手","愚公移山","kiss","美瞳","音乐剧","抱起史","捉迷藏","分手"];
+var delayTimes = [10];
+var showImgIndex = 0;
+var imgNames = [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "11",
+    "12",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48"
+];
 
 var PictureScene = cc.Scene.extend({
     pic : null,
@@ -314,17 +358,31 @@ var PictureScene = cc.Scene.extend({
         this._super();
         var picSprite = new cc.Sprite(this.pic);
         picSprite.setPosition(cc.winSize.width/2,cc.winSize.height/2);
-        var scaleX = cc.winSize.width/picSprite.getContentSize().width;
-        var scaleY = cc.winSize.height/picSprite.getContentSize().height;
-        picSprite.setScaleX(scaleX);
-        picSprite.setScaleY(scaleY);
+        var picWidth = picSprite.getContentSize().width;
+        var picHeight = picSprite.getContentSize().height;
+        var scaleFactor = (cc.winSize.height)/picHeight;
+        picSprite.setScale(scaleFactor,scaleFactor);
+
         this.addChild(picSprite);
 
-        this.scheduleOnce(this.changeScene,5,"changeScene");
+        var delayTime;
+
+        if(showImgIndex<delayTimes.length){
+            delayTime = delayTimes[showImgIndex];
+        }else if(showImgIndex>=(imgNames.length-10)){
+            delayTime = 5;
+        }else{
+            delayTime = 5;
+        }
+
+        showImgIndex++;
+        if(showImgIndex<imgNames.length){
+            this.scheduleOnce(this.changeScene,delayTime,"changeScene");
+        }
     },
     changeScene : function(){
         console.log("changeScene");
-        var picScene = new PictureScene(res.mainbg_jpg);
+        var picScene = new PictureScene("res/p"+imgNames[showImgIndex]+".jpg");
         cc.director.runScene(FadeTransition(1,picScene));
     }
 });
